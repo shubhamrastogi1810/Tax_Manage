@@ -1,2 +1,2 @@
-info.txt
-info2.txt
+case1.in
+case2.in
