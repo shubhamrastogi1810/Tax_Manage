@@ -1,6 +1,1 @@
 case1.in
-case2.in
-case3.in
-case4.in
-case5.in
-case6.in

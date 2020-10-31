@@ -3,12 +3,14 @@ def get_per_info(filename):
         f = open(filename,"r")
         b=0
         a=1
+	spac = "    "
         per_info ={}
         for i in f:
                 b += len(i)
-                key,value = i.split(":")
-                per_info[key] = value.strip()
-                a+=1
+                key,val = i.split(":")
+		per_info[key] = val.strip()
+		
+		a+=1
                 if a == 13:
                         break
         f.close()
@@ -16,6 +18,7 @@ def get_per_info(filename):
 
         print()
         for key,val in lis:
+		
                 print(frmt.format(key,val))
         return b,filename
 
@@ -59,7 +62,10 @@ def deduct(a,b):
                 print(frmt.format(key,val))
         f.close()
         a += c
+
         return a,b
+        return a,b,item
+
 
 def get_bank_detail(ofset,filename):
 	print("")

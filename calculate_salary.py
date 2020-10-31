@@ -24,7 +24,11 @@ def incomecalc(p1,fname):
 		d_sal = d_sal + item[i]
 		b1=n_sal - d_sal
 	print(frmt.format("Total Deduction",d_sal))
+
 	print(frmt.format("Inc. under head of Salary",b1))
+
+	print(frmt.format("Total Salary",b1))
+
 	ren = item[7]
 	print(frmt.format("rent received",ren))
 	tp= item[8]
@@ -37,4 +41,13 @@ def incomecalc(p1,fname):
 	print(frmt.format("Other sources Income",b3))
 	b = b1 + b2 + b3
 	print(frmt.format("Gross Total Income",b))
+
 	return b
+
+	c1=0
+	for i in range(12,len(item)):
+		c1=c1 + item[i]
+		c2 = b - c1
+	
+	return c2
+
