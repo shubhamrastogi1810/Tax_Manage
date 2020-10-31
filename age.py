@@ -1,7 +1,7 @@
 from datetime import datetime,date
 
-def  agecal():
-        f = open("info.txt","r")
+def  agecal(filename):
+        f = open(filename,"r")
         a=0
         b=0
         for i in f:

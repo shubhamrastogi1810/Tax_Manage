@@ -59,7 +59,7 @@ def deduct(a,b):
                 print(frmt.format(key,val))
         f.close()
         a += c
-        return a,b,item
+        return a,b
 
 def get_bank_detail(ofset,filename):
 	print("")
