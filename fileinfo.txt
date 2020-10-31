@@ -1,1 +1,10 @@
 case1.in
+case2.in
+case3.in
+case4.in
+case5.in
+case6.in
+case7.in
+case8.in
+case9.in
+case10.in

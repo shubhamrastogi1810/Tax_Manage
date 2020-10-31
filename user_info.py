@@ -1,26 +1,24 @@
 frmt = '{:25}:{:}'
 def get_per_info(filename):
-        f = open(filename,"r")
-        b=0
-        a=1
-	spac = "    "
-        per_info ={}
-        for i in f:
-                b += len(i)
-                key,val = i.split(":")
+	f = open(filename,"r")
+	b = 0
+	a = 1
+	per_info ={}
+	for i in f:
+		b += len(i)
+		key,val = i.split(":")
 		per_info[key] = val.strip()
-		
 		a+=1
-                if a == 13:
-                        break
-        f.close()
-        lis = list(per_info.items())
+		if a == 13:
+			break
+	f.close()
+	lis = list(per_info.items())
+	for key,val in lis:
+		print(frmt.format(key,val))
+	
+	return b,filename
 
-        print()
-        for key,val in lis:
-		
-                print(frmt.format(key,val))
-        return b,filename
+
 
 def salcalc(a,b):
         print("")

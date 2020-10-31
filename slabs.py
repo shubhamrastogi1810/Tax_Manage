@@ -88,20 +88,21 @@ def taxcomp(off_p1,filename,d1,d2):
 	y = date(2021,3,31)#date_termend
 	z = date.today()#today's date 	
 	amt = d5
-	if x <= y:
+	adv_tax = int(f2.strip())
+	if x <= y and z <= y :
         	d7 = 0
 	else:
         	yrtm = ((x.year - y.year) * 12) + (x.month - y.month)
-	        amt = amt // 100
+	        amt = (amt - adv_tax) // 100
         	d7 = amt * yrtm
 	print(frmt.format("Intrest u/s 234A ",d7))
-	adv_tax = int(f2.strip())
+	
 	
 	tax_liablity = d5 - adv_tax
 	yrmt = ((z.year - y.year) * 12) + (z.month - y.month)
 	
 	if tax_liablity >= 10000:
-		if tax_liablity >= (0.9 * d5):
+		if adv_tax >= (0.9 * d5):
 			d8 = 0
 		else:
 			if z <= y:
