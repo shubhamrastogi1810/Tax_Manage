@@ -1,0 +1,12 @@
+
+		ALL of AGE <= 60 YEARS
+
+case1 :-	salary 12 lakh and deductions 1,90,000  and advance tax paid 1 lakh
+case2 :-	salary 15 lakh and deductions 60,000    and advance tax paid 2 lakh
+case3 :-	salary 8  lakh and deductions  40,000   and advance tax paid 90k.
+case4 :-	salary 4  lakh and deductions  50,000   and advance tax paid 50k.
+case5 :- 	salary 3  lakh and deductions  30k      and advance tax paid 0.
+case6 :-        salary 1.5lakh and deductions  0        and advance tax paid 0.
+
+
+
