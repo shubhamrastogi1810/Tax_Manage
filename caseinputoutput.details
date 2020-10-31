@@ -1,12 +1,26 @@
 
 		ALL of AGE <= 60 YEARS
 
-case1 :-	salary 12 lakh and deductions 1,90,000  and advance tax paid 1 lakh
-case2 :-	salary 15 lakh and deductions 60,000    and advance tax paid 2 lakh
-case3 :-	salary 8  lakh and deductions  40,000   and advance tax paid 90k.
-case4 :-	salary 4  lakh and deductions  50,000   and advance tax paid 50k.
-case5 :- 	salary 3  lakh and deductions  30k      and advance tax paid 0.
-case6 :-        salary 1.5lakh and deductions  0        and advance tax paid 0.
+case1  :-	 salary 12 lakh and deductions 1,90,000  and advance tax paid 1 lakh
 
+case2  :-	 salary 15 lakh and deductions 60,000    and advance tax paid 2 lakh
+
+case3  :-	 salary 8  lakh and deductions  40,000   and advance tax paid 90k.
+
+case4  :-	 salary 4  lakh and deductions  50,000   and advance tax paid 50k.
+
+case5  :- 	 salary 3  lakh and deductions  30k      and advance tax paid 0.
+
+case6  :-        salary 1.5lakh and deductions  0        and advance tax paid 0.
+
+case7  :-        checking for the intrsets u/s 234A and 234B.
+
+case8  :-        salary 25  lakh and deductions  0       and advance tax paid 0.
+
+case9  :-        salary 16.5lakh and deductions 400000   and advance tax paid 5lakh.
+		 checking for the maximun amount of deductions valid under differnet 
+		 sections.
+
+case10 :-        salary 5lakh and deductions 2 lakh      and advance tax paid 5k.
 
 
