@@ -86,17 +86,19 @@ def taxcomp(off_p1,filename,d1,d2):
 	dat,mon,year =map(int, a.split("-"))
 	x = date(year,mon,dat)#date_deposit
 	y = date(2021,3,31)#date_termend
-	z = date.today()#today's date 	
+	z = date(2021,4,13)#today's date 	
 	amt = d5
 	adv_tax = int(f2.strip())
-	if x <= y and z <= y :
+	if x <= y and  z <= y :
         	d7 = 0
 	else:
-        	yrtm = ((x.year - y.year) * 12) + (x.month - y.month)
-	        amt = (amt - adv_tax) // 100
-        	d7 = amt * yrtm
+		yrtm = ((x.year - y.year) * 12) + (x.month - y.month)
+		if adv_tax >= amt:
+			amt = 0
+		else:
+        		amt = (amt - adv_tax) // 100
+		d7 = amt * yrtm
 	print(frmt.format("Intrest u/s 234A ",d7))
-	
 	
 	tax_liablity = d5 - adv_tax
 	yrmt = ((z.year - y.year) * 12) + (z.month - y.month)
@@ -109,7 +111,7 @@ def taxcomp(off_p1,filename,d1,d2):
 				d8 = 0
 			else:
 				amt = (tax_liablity)// 100 
-				d8 = amt * yrtm
+				d8 = amt * yrmt
 	else:
 		d8 = 0
 
@@ -143,5 +145,4 @@ def slabfind(off_p1,filename,age,income):
 	else:
 		a = "Invalid Input"
 	return a
-
 
