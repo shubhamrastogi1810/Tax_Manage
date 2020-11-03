@@ -6,7 +6,7 @@ import calc_deduct as cd
 
 
 frmt ='{:25}:{:}'
-numfrmt = '{:25}:{:.2f}'
+
 
 
 frmt ='{:25}:{:}'
@@ -26,7 +26,7 @@ def showoutput(a,i):
 	
 	
 	tax_payable = slabs.slabfind(off_p1,filename,agee,ded)
-	print(numfrmt.format("Tax to Pay",tax_payable))
+	
 	ui.get_bank_detail(off_p1,filename)
 	
 	return 0

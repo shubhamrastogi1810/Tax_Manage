@@ -1,5 +1,6 @@
 from datetime import datetime,date
 frmt = '{:25}:{:}'
+numfrmt = '{:25}:{:.2f}'
 def Slab0(age,income):
 	d1 = 0
 	d2 = 0
@@ -89,15 +90,18 @@ def taxcomp(off_p1,filename,d1,d2):
 	z = date(2021,4,13)#today's date 	
 	amt = d5
 	adv_tax = int(f2.strip())
-	if x <= y and  z <= y :
+	if x <= y and z <= y:
         	d7 = 0
 	else:
-		yrtm = ((x.year - y.year) * 12) + (x.month - y.month)
-		if adv_tax >= amt:
-			amt = 0
+		if z > y:
+			yrtm = abs(((z.year - y.year) * 12) + (z.month - y.month))
+			if adv_tax >= amt:
+				amt = 0
+			else:
+        			amt = (amt - adv_tax) // 100
+			d7 = amt * yrtm
 		else:
-        		amt = (amt - adv_tax) // 100
-		d7 = amt * yrtm
+			d7 = 0
 	print(frmt.format("Intrest u/s 234A ",d7))
 	
 	tax_liablity = d5 - adv_tax
@@ -122,8 +126,16 @@ def taxcomp(off_p1,filename,d1,d2):
 	d10 = 0
 	print(frmt.format("Intrest u/s 234F ",d10))
 	d11 = d5+ d7 + d8 + d9 + d10 - d6
-	
-	return d11
+	print(frmt.format("Total Tax is",d11))
+	d12 = adv_tax
+	print(frmt.format("Tax Paid",d12))
+	if d11 >= d12:
+		d13 = d11 - d12
+		print(numfrmt.format("Amount Payable",d13))
+	elif d12 > d11:
+		d14 = d12 - d11
+		print(numfrmt.format("Amount Refund",d14))
+	return 0
 
 
 def slabfind(off_p1,filename,age,income):
@@ -144,5 +156,5 @@ def slabfind(off_p1,filename,age,income):
 		
 	else:
 		a = "Invalid Input"
-	return a
+	return 0
 
