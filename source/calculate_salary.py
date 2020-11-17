@@ -1,53 +1,47 @@
-frmt ='{:25}:{:}'
-def incomecalc(p1,fname):
-	f = open(fname,"r")
-	item =[]
-	f.seek(p1)
-	a=0
-	
-	for line in f:
-		key,val = line.split(":")
-		item.append(int(val.strip()))
-		a+=1
-		if a == 30:
-			break	
-	f.close()
-	
-	t_sal=0
-	d_sal=0
-	for i in range(0,3):
-		t_sal = t_sal + item[i]
-		n_sal = t_sal - item[3]
-	print(frmt.format("Gross Salary",t_sal))
-	print(frmt.format("Net Salary",n_sal))
-	for i in range(4,7):
-		d_sal = d_sal + item[i]
-		b1=n_sal - d_sal
-	print(frmt.format("Total Deduction",d_sal))
+""" calculate the taxable_inc of the  person under salary and house income """
+FRMT='{:25}:{:}'
+def incomecalc(ofset,filename):
+    """ calculate the income from the house property and salary """
+    filevar = open(filename,"r")
+    item =[]
+    filevar.seek(ofset)
+    linecount=0#a
 
-	print(frmt.format("Inc. under head of Salary",b1))
+    for line in filevar:
+        val = line.split(":")
+        item.append(int(val[-1].strip()))
+        linecount+=1
+        if linecount == 30:
+            break
+    filevar.close()
 
-	print(frmt.format("Total Salary",b1))
+    t_sal=0
+    d_sal=0
+    for i in range(0,3):
+        t_sal = t_sal + item[i]
+        n_sal = t_sal - item[3]
+    print(FRMT.format("Gross Salary",t_sal))
+    print(FRMT.format("Net Salary",n_sal))
+    for i in range(4,7):
+        d_sal = d_sal + item[i]
+        net_sal=n_sal - d_sal#b1
+    print(FRMT.format("Total Deduction",d_sal))
 
-	ren = item[7]
-	print(frmt.format("rent received",ren))
-	tp= item[8]
-	b23 = ren - tp
-	print(frmt.format("Annual value",b23))
-	b24 = b23 * 0.3
-	b2 = (b23 - b24 - item[9]) + item[10]
-	print(frmt.format("Income Head of Sal",b2))
-	b3 = item[11]
-	print(frmt.format("Other sources Income",b3))
-	b = b1 + b2 + b3
-	print(frmt.format("Gross Total Income",b))
+    print(FRMT.format("Inc. under head of Salary",net_sal))
 
-	return b
+    print(FRMT.format("Total Salary",net_sal))
 
-	c1=0
-	for i in range(12,len(item)):
-		c1=c1 + item[i]
-		c2 = b - c1
-	
-	return c2
+    rent = item[7]
+    print(FRMT.format("rent received",rent))
+    tax_paid= item[8]
+    annual = rent - tax_paid#b23
+    print(FRMT.format("Annual value",annual))
+    house_inc = annual * 0.3#b24
+    nethouse_inc = (annual - house_inc - item[9]) + item[10]
+    print(FRMT.format("Income Head of Tax_property",nethouse_inc))
+    other_inc = item[11]#b3
+    print(FRMT.format("Other sources Income",other_inc))
+    gross_inc = net_sal + nethouse_inc + other_inc
+    print(FRMT.format("Gross Total Income",gross_inc))
 
+    return gross_inc
