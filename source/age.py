@@ -1,21 +1,21 @@
+""" calculate the age of the user module """
 from datetime import datetime,date
 
-def  agecal(filename):
-        f = open(filename,"r")
-        a=0
-        b=0
-        for i in f:
-                if b == 2:
-                        break
-                a+=len(i)
-                b+=1
-        f.seek(a)
-        b,a = f.readline().split(":")
-        f.close()
-        dat,mon,year =map(int, a.split("-"))
-        d1 = datetime(year,mon,dat)
-        d2 = date.today()
-        age= (d2.year - d1.year) -((d1.month,d1.day)>(d2.month,d2.day))
-        return age
-
-
+def agecal(filename):
+    """calculate the age of the user """
+    filevar = open(filename,"r")
+    ofset=0#a
+    linecount=0#b
+    for i in filevar:
+        if linecount == 2:
+            break
+        ofset+=len(i)
+        linecount+=1
+    filevar.seek(ofset)
+    inp_date = filevar.readline().split(":")
+    filevar.close()
+    dat,mon,year =map(int, inp_date[-1].split("-"))
+    birth = datetime(year,mon,dat)#d1
+    nowd = date.today()#d2
+    age = (nowd.year - birth.year) -((birth.month,birth.day)>(nowd.month,nowd.day))
+    return age

@@ -1,41 +1,38 @@
+""" This module should be run to calculate the tax of individual """
 import user_info as ui
 import calculate_salary as cs
 import age
 import slabs
 import calc_deduct as cd
 
+FRMT ='{:25}:{:}'
 
-frmt ='{:25}:{:}'
+def showoutput(fname,filename):
+    """This function will show the output we get from computation """
+    print('\n\n',filename)
+    ofsset = ui.get_per_info(fname)
+    ofset = ui.salcalc(ofsset,fname)
+
+    income = cs.incomecalc(ofsset,fname)
+    off_d1= ui.deduct(ofset,fname)
+    agee = age.agecal(fname)
+    deduct_val = cd.deduct_amount(ofset,fname,agee)
+    print(FRMT.format("Gross income is",income))
+    ded = income - deduct_val
+    print(FRMT.format("Income after deduction",ded))
 
 
+    slabs.slabfind(off_d1,fname,agee,ded)
 
-frmt ='{:25}:{:}'
+    ui.get_bank_detail(off_d1,fname)
 
-def showoutput(a,i):
-	print('\n\n',i)
-	p1,fname = ui.get_per_info(a)	
-	ofset,filename = ui.salcalc(p1,fname)
-	
-	income = cs.incomecalc(p1,filename)
-	off_p1,filename = ui.deduct(ofset,filename)
-	agee = age.agecal(filename)
-	deduct_val = cd.deduct_amount(ofset,filename,agee) 	
-	print(frmt.format("Gross income is",income))
-	ded = income - deduct_val
-	print(frmt.format("Income after deduction",ded))	
-	
-	
-	tax_payable = slabs.slabfind(off_p1,filename,agee,ded)
-	
-	ui.get_bank_detail(off_p1,filename)
-	
-	return 0
+    return 0
 
-f = open("fileinfo.txt")
+filevar = open("fileinfo.txt")
 
-for i in f:
-	
-	a = "../cases/" + str(i.strip())
-	a = showoutput(a,i)
-        
-f.close()
+for i in filevar:
+
+    FILE = "../cases/" + str(i.strip())
+    showoutput(FILE,i)
+
+filevar.close()
