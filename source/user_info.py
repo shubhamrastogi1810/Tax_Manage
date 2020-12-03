@@ -1,6 +1,7 @@
 """ display the details of the user """
 FRMT = '{:25}:{:}'
-def get_per_info(filename):
+
+def get_per_info(filename,fileout):
     """ display the personal info of the user """
     filevar = open(filename,"r")
     count = 0
@@ -14,16 +15,19 @@ def get_per_info(filename):
         if linecount == 13:
             break
     filevar.close()
+    file_outvar = open(fileout,"a")
     lis = list(per_info.items())
     for key,val in lis:
-        print(FRMT.format(key,val))
+        file_outvar.write(FRMT.format(key,val)+'\n')
+    file_outvar.close()
     return count
 
 
 
-def salcalc(ofset,filename):#a,b
+def salcalc(ofset,filename,fileout):#a,b
     """ display salary and house income """
-    print("")
+    file_outvar = open(fileout,"a")
+    file_outvar.write("\n\n")
     per_sal = {}
     linecount = 1#d
     filevar = open(filename,"r")
@@ -36,16 +40,19 @@ def salcalc(ofset,filename):#a,b
         count += len(line)
         if linecount == 13:
             break
-    item = list(per_sal.items())
-    for key,val in item:
-        print(FRMT.format(key,val))
     filevar.close()
+    item = list(per_sal.items())
+
+    for key,val in item:
+        file_outvar.write(FRMT.format(key,val)+"\n")
+    file_outvar.close()
     ofset += count
     return ofset
 
-def deduct(ofset,filename):
+def deduct(ofset,filename,fileout):
     """ display deductions """
-    print("")
+    file_outvar = open(fileout,"a")
+    file_outvar.write("\n\n")
     ded_sal = {}
     linecount = 1
     filevar = open(filename,"r")
@@ -58,28 +65,31 @@ def deduct(ofset,filename):
         count +=len(line)
         if linecount == 19:
             break
-    item = list(ded_sal.items())
-    for key,val in item:
-        print(FRMT.format(key,val))
     filevar.close()
+    item = list(ded_sal.items())
+
+    for key,val in item:
+        file_outvar.write(FRMT.format(key,val)+'\n')
+    file_outvar.close()
     ofset += count
 
     return ofset
 
 
 
-def get_bank_detail(ofset,filename):
+def get_bank_detail(ofset,filename,fileout):
     """ display bank details """
-    print("")
+    file_outvar = open(fileout,"a")
+    file_outvar.write("\n\n")
     filevar = open(filename,"r")
     bank_detail ={}
     filevar.seek(ofset)
     for line in filevar:
         key,val = line.split(":")
         bank_detail[key] = val.strip()
-
+    filevar.close()
     item = list(bank_detail.items())
     for key,val in item:
-        print(FRMT.format(key,val))
-
+        file_outvar.write(FRMT.format(key,val)+'\n')
+    file_outvar.close()
     return 0

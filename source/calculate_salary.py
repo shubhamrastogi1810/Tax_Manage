@@ -1,6 +1,7 @@
 """ calculate the taxable_inc of the  person under salary and house income """
 FRMT='{:25}:{:}'
-def incomecalc(ofset,filename):
+
+def incomecalc(ofset,filename,fileout):
     """ calculate the income from the house property and salary """
     filevar = open(filename,"r")
     item =[]
@@ -20,28 +21,29 @@ def incomecalc(ofset,filename):
     for i in range(0,3):
         t_sal = t_sal + item[i]
         n_sal = t_sal - item[3]
-    print(FRMT.format("Gross Salary",t_sal))
-    print(FRMT.format("Net Salary",n_sal))
+    file_out = open(fileout,"a")
+    file_out.write(FRMT.format("Gross Salary",t_sal)+'\n')
+    file_out.write(FRMT.format("Net Salary",n_sal)+'\n')
     for i in range(4,7):
         d_sal = d_sal + item[i]
         net_sal=n_sal - d_sal#b1
-    print(FRMT.format("Total Deduction",d_sal))
+    file_out.write(FRMT.format("Total Deduction",d_sal)+'\n')
 
-    print(FRMT.format("Inc. under head of Salary",net_sal))
+    file_out.write(FRMT.format("Inc. under head of Salary",net_sal)+'\n')
 
-    print(FRMT.format("Total Salary",net_sal))
+    file_out.write(FRMT.format("Total Salary",net_sal)+'\n')
 
     rent = item[7]
-    print(FRMT.format("rent received",rent))
+    file_out.write(FRMT.format("rent received",rent)+'\n')
     tax_paid= item[8]
     annual = rent - tax_paid#b23
-    print(FRMT.format("Annual value",annual))
+    file_out.write(FRMT.format("Annual value",annual)+'\n')
     house_inc = annual * 0.3#b24
     nethouse_inc = (annual - house_inc - item[9]) + item[10]
-    print(FRMT.format("Income Head of Tax_property",nethouse_inc))
+    file_out.write(FRMT.format("Income Head of Tax_property",nethouse_inc)+'\n')
     other_inc = item[11]#b3
-    print(FRMT.format("Other sources Income",other_inc))
+    file_out.write(FRMT.format("Other sources Income",other_inc)+'\n')
     gross_inc = net_sal + nethouse_inc + other_inc
-    print(FRMT.format("Gross Total Income",gross_inc))
-
+    file_out.write(FRMT.format("Gross Total Income",gross_inc)+'\n')
+    file_out.close()
     return gross_inc

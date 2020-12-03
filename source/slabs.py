@@ -2,6 +2,7 @@
 from datetime import date
 FRMT = '{:25}:{:}'
 NUMFRMT = '{:25}:{:.2f}'
+
 def slab_zero():
     """ income < 2.5 lakh """
     tax_inc = 0
@@ -68,20 +69,21 @@ def slab_three(age,income):
 
 
 
-def taxcomp(off_p1,filename,taxi,reba):
+def taxcomp(off_p1,filename,taxi,reba,fileout):
     """computation of the tax """
-    print("")
+    file_out = open(fileout,"a")
+    file_out.write("\n\n")
 
-    print(FRMT.format("Tax payable on inc.",taxi))
-    print(FRMT.format("Rebate u/s 87A",reba))
+    file_out.write(FRMT.format("Tax payable on inc.",taxi)+'\n')
+    file_out.write(FRMT.format("Rebate u/s 87A",reba)+'\n')
     net_tax = taxi - reba#d3
-    print(FRMT.format("Tax after Rebate ",net_tax))
+    file_out.write(FRMT.format("Tax after Rebate ",net_tax)+'\n')
     cess = net_tax * 0.04
-    print(NUMFRMT.format("Health Education cess ",cess))
+    file_out.write(NUMFRMT.format("Health Education cess ",cess)+'\n')
     total_tax = net_tax + cess
-    print(FRMT.format("Total tax and cess ",total_tax))
+    file_out.write(FRMT.format("Total tax and cess ",total_tax)+'\n')
     arrears = 0
-    print(FRMT.format("Relif u/s 89",arrears))
+    file_out.write(FRMT.format("Relif u/s 89",arrears)+'\n')
     filevar = open(filename,"r")
     filevar.seek(off_p1)
     count = filevar.readline().split(":")
@@ -104,7 +106,7 @@ def taxcomp(off_p1,filename,taxi,reba):
                 interesta = amt * yrtm
         else:
             interesta = 0
-    print(FRMT.format("Intrest u/s 234A ",interesta))
+    file_out.write(FRMT.format("Intrest u/s 234A ",interesta)+'\n')
 
     tax_liablity = total_tax - adv_tax
     yrmt = ((datetoday.year - termend.year) * 12) + (datetoday.month - termend.month)
@@ -122,38 +124,39 @@ def taxcomp(off_p1,filename,taxi,reba):
         interestb = 0
 
     filevar.close()
-    print(FRMT.format("Intrest u/s 234B ",interestb))
+    file_out.write(FRMT.format("Intrest u/s 234B ",interestb)+'\n')
     interestc = 0
-    print(FRMT.format("Intrest u/s 234C ",interestc))
+    file_out.write(FRMT.format("Intrest u/s 234C ",interestc)+'\n')
     interestf = 0
-    print(FRMT.format("Intrest u/s 234F ",interestf))
+    file_out.write(FRMT.format("Intrest u/s 234F ",interestf)+'\n')
     amt_payable = total_tax + interesta + interestb + interestc + interestf - arrears#d11
-    print(FRMT.format("Total Tax is",amt_payable))
+    file_out.write(FRMT.format("Total Tax is",amt_payable)+'\n')
     tax_paid = adv_tax#d12
-    print(FRMT.format("Tax Paid",tax_paid))
+    file_out.write(FRMT.format("Tax Paid",tax_paid)+'\n')
     if amt_payable >= tax_paid:#d11 >= d12
         more_pay = amt_payable - tax_paid#d13
-        print(NUMFRMT.format("Amount Payable",more_pay))
+        file_out.write(NUMFRMT.format("Amount Payable",more_pay)+'\n')
     elif tax_paid > amt_payable:
         refund = tax_paid  - amt_payable
-        print(NUMFRMT.format("Amount Refund",refund))
+        file_out.write(NUMFRMT.format("Amount Refund",refund)+'\n')
+    file_out.close()
     return 0
 
 
-def slabfind(off_p1,filename,age,income):
+def slabfind(off_p1,filename,age,income,fileout):
     """ finding the correct slab """
     if 0 < income <=250000:
         taxi,reba = slab_zero()
-        taxcomp(off_p1,filename,taxi,reba)
+        taxcomp(off_p1,filename,taxi,reba,fileout)
     elif 250000 < income<=500000:
         taxi,reba = slab_one(age,income)
-        taxcomp(off_p1,filename,taxi,reba)
+        taxcomp(off_p1,filename,taxi,reba,fileout)
 
     elif 500000 < income <=1000000:
         taxi,reba = slab_two(age,income)
-        taxcomp(off_p1,filename,taxi,reba)
+        taxcomp(off_p1,filename,taxi,reba,fileout)
 
     elif 1000000 < income<=5000000:
         taxi,reba = slab_three(age,income)
-        taxcomp(off_p1,filename,taxi,reba)
+        taxcomp(off_p1,filename,taxi,reba,fileout)
     return 0

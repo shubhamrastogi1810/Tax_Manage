@@ -1,4 +1,5 @@
 """this module calculates the deductions """
+
 def deduct_amount(ofset,filename,agee):
     """calculate the total deduction amount """
     filevar = open(filename,"r")
@@ -55,8 +56,5 @@ def deduct_amount(ofset,filename,agee):
         new_val.append(0)
     #80u
     new_val.append(min(125000,item_val[17]))
-    addi = 0
-    for i in new_val:
-        addi +=i
 
-    return addi
+    return sum(new_val)
