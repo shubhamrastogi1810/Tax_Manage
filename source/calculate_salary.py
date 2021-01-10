@@ -29,7 +29,7 @@ def incomecalc(ofset,filename,fileout):
         net_sal=n_sal - d_sal#b1
     file_out.write(FRMT.format("Total Deduction",d_sal)+'\n')
 
-    file_out.write(FRMT.format("Inc. under head of Salary",net_sal)+'\n')
+    file_out.write(FRMT.format("Salary Income",net_sal)+'\n')
 
     file_out.write(FRMT.format("Total Salary",net_sal)+'\n')
 
@@ -40,7 +40,7 @@ def incomecalc(ofset,filename,fileout):
     file_out.write(FRMT.format("Annual value",annual)+'\n')
     house_inc = annual * 0.3#b24
     nethouse_inc = (annual - house_inc - item[9]) + item[10]
-    file_out.write(FRMT.format("Income Head of Tax_property",nethouse_inc)+'\n')
+    file_out.write(FRMT.format("Tax_property Income",nethouse_inc)+'\n')
     other_inc = item[11]#b3
     file_out.write(FRMT.format("Other sources Income",other_inc)+'\n')
     gross_inc = net_sal + nethouse_inc + other_inc
